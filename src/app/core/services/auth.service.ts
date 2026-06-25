@@ -20,6 +20,15 @@ export class AuthService {
         return this.http.get<User>(`${ environment.apiUrl }/auth/me`);
     }
 
+    logout() {
+        return this.http.post(`${ environment.apiUrl }/auth/logout`, { refreshToken: this.getRefreshToken() });
+    }
+
+    clearTokens(): void {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+    }
+
     saveTokens(accessToken: string, refreshToken: string): void {
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', refreshToken);
@@ -35,10 +44,5 @@ export class AuthService {
 
     isLoggedIn(): boolean {
         return !!this.getAccessToken();
-    }
-
-    logout(): void {
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
     }
 }

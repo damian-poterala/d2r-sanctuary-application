@@ -4,3 +4,5 @@
     <p>Rola {{ user()!.role }}</p>
     <p>Ostatnie logowanie: {{ user()!.last_login_at }}</p>
 }
+
+<p-button (click)="logout()" label="Wyloguj"></p-button>
