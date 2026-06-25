@@ -1,0 +1,25 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--color-background);
+    color: var(--color-text);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+button, input, textarea {
+    font: inherit
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}

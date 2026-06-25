@@ -1,0 +1,90 @@
+.register-page {
+    min-height: 100vh;
+    background-image: url('/background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.overlay {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, .70);
+    padding: 30px;
+}
+
+.register-card {
+    width: 100%;
+    max-width: 520px;
+    padding: 30px;
+    border-radius: 18px;
+    background: rgba(20, 20, 20, .75);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, .08);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .6);
+}
+
+.logo {
+    display: block;
+    width: 260px;
+    margin: 0 auto 25px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 34px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #bdbdbd;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.form-field {
+    width: 100%;
+}
+
+.form-field p-floatLabel {
+    display: block;
+    width: 100%;
+}
+
+.form-field input {
+    width: 100%;
+}
+
+.terms {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #bdbdbd;
+}
+
+.login-link a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+.error {
+    display: block;
+    // margin-top: 8px;
+    color: #ff6b6b;
+    font-size: .85rem;
+    font-weight: 500;
+}

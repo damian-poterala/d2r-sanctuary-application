@@ -1,0 +1,103 @@
+<div class="register-page">
+    <div class="overlay">
+        <div class="register-card">
+            <img src="/d2r_sanctuary_logo.png" alt="D2R Sanctuary" class="logo">
+            <h2>Rejestracja</h2>
+            <p class="subtitle">
+                Utwórz konto i rozpocznij swoją przygodę z D2R Sanctuary.
+            </p>
+            <form [formGroup]="registerForm">
+                <div class="form-field">
+                    <p-floatLabel>
+                        <input [invalid]="registerForm.controls.username.invalid && (registerForm.controls.username.dirty || registerForm.controls.username.touched)" pInputText id="username" formControlName="username" type="text" class="w-full">
+                        <label for="username">Login</label>
+                    </p-floatLabel>
+                    @if(registerForm.controls.username.invalid && (registerForm.controls.username.dirty || registerForm.controls.username.touched)) {
+                        <small class="error">
+                            @if(registerForm.controls.username.hasError('required')) {
+                                Login jest wymagany.
+                            }
+
+                            @if(registerForm.controls.username.hasError('minLength')) {
+                                Login musi zawierać minimum 3 znaki.
+                            }
+
+                            @if(registerForm.controls.username.hasError('maxLength')) {
+                                Login może zawierać maksymalnie 20 znaków.
+                            }
+                        </small>
+                    }
+                </div>
+                <div class="form-field">
+                    <p-floatLabel>
+                        <input [invalid]="registerForm.controls.email.invalid && (registerForm.controls.email.dirty || registerForm.controls.email.touched)" pInputText id="email" formControlName="email" type="email" class="w-full">
+                        <label for="email">Email</label>
+                    </p-floatLabel>
+                    @if(registerForm.controls.email.invalid && (registerForm.controls.email.dirty || registerForm.controls.email.touched)) {
+                        <small class="error">
+                            @if(registerForm.controls.email.hasError('required')) {
+                                Adres e-mail jest wymagany.
+                            }
+
+                            @if(registerForm.controls.email.hasError('email')) {
+                                Wprowadź poprawny adres e-mail.
+                            }
+                        </small>
+                    }
+                </div>
+                <div class="form-field">
+                    <p-floatLabel>
+                        <p-password [invalid]="registerForm.controls.password.invalid && (registerForm.controls.password.dirty || registerForm.controls.password.touched)" id="password" formControlName="password" [feedback]="false" toggleMask="true" fluid="true"></p-password>
+                        <label for="password">Hasło</label>
+                    </p-floatLabel>
+                    @if(registerForm.controls.password.invalid && (registerForm.controls.password.dirty || registerForm.controls.password.touched)) {
+                        <small class="error">
+                            @if(registerForm.controls.password.hasError('required')) {
+                                Hasło jest wymagane.
+                            }
+
+                            @if(registerForm.controls.password.hasError('minLength')) {
+                                Hasło musi zawierać minimum 8 znaków.
+                            }
+                        </small>
+                    }
+                </div>
+                <div class="form-field">
+                    <p-floatLabel>
+                        <p-password [invalid]="registerForm.controls.confirmPassword.invalid && (registerForm.controls.confirmPassword.dirty || registerForm.controls.confirmPassword.touched)" id="confirmPassword" formControlName="confirmPassword" [feedback]="false" toggleMask="true" fluid="true"></p-password>
+                        <label for="confirmPassword">Powtórz hasło</label>
+                    </p-floatLabel>
+                    @if(registerForm.controls.confirmPassword.invalid && (registerForm.controls.confirmPassword.dirty || registerForm.controls.confirmPassword.touched)) {
+                        <small class="error">
+                            @if(registerForm.controls.confirmPassword.hasError('required')) {
+                                Powtórz hasło.
+                            }
+                        </small>
+                    }
+
+                    @if(registerForm.hasError('passwordMismatch') && registerForm.controls.password.dirty && registerForm.controls.confirmPassword.dirty) {
+                        <small class="error">
+                            Hasła nie są identyczne.
+                        </small>
+                    } 
+                </div>
+                <div class="terms">
+                    <p-checkbox binary="true" inputId="terms" formControlName="acceptTerms"></p-checkbox>
+                    <label for="terms">
+                        Akceptuje regulamin
+                    </label>
+                    @if(registerForm.controls.acceptTerms.invalid && (registerForm.controls.acceptTerms.dirty || registerForm.controls.acceptTerms.touched)) {
+                        <small class="error">
+                            Musisz zaakceptować regulamin.
+                        </small>
+                    }
+                </div>
+                <p-button (click)="onSubmit()" [disabled]="registerForm.invalid" [loading]="isLoading" label="Załóż konto" styleClass="w-full"></p-button>
+            </form>
+            <div class="login-link">
+                Masz już konto?
+                <a routerLink="/login">Zaloguj się</a>
+            </div>
+        </div>
+    </div>
+</div>
