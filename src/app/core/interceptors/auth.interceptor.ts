@@ -1,17 +1,63 @@
-import { HttpInterceptorFn } from "@angular/common/http";
+import {
+    HttpErrorResponse,
+    HttpInterceptorFn
+} from '@angular/common/http';
+
+import { inject } from '@angular/core';
+import { Router } from '@angular/router';
+
+import {
+    catchError,
+    switchMap,
+    throwError
+} from 'rxjs';
+
+import { AuthService } from '../services/auth.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-    const token = localStorage.getItem('accessToken');
 
-    if(!token) {
+    const authService = inject(AuthService);
+    const router = inject(Router);
+
+    if (
+        req.url.includes('/auth/login') ||
+        req.url.includes('/auth/register') ||
+        req.url.includes('/auth/refresh')
+    ) {
         return next(req);
     }
 
-    const clonedRequest = req.clone({
-        setHeaders: {
-            Authorization: `Bearer ${ token }`
-        }
-    });
+    const token = authService.getAccessToken();
 
-    return next(clonedRequest);
-}
+    const authReq = token ? req.clone({ setHeaders: { Authorization: `Bearer ${token}` } }) : req;
+
+    return next(authReq).pipe(
+        catchError((error: HttpErrorResponse) => {
+            if (error.status !== 401) {
+                return throwError(() => error);
+            }
+
+            return authService.refresh().pipe(
+                switchMap((tokens) => {
+                    authService.saveTokens(
+                        tokens.accessToken,
+                        tokens.refreshToken
+                    );
+
+                    const retryReq = req.clone({
+                        setHeaders: {
+                            Authorization: `Bearer ${tokens.accessToken}`
+                        }
+                    });
+
+                    return next(retryReq);
+                }),
+                catchError((refreshError) => {
+                    authService.clearTokens();
+                    router.navigate(['/login']);
+                    return throwError(() => refreshError);
+                })
+            );
+        })
+    );
+};

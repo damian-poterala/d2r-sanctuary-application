@@ -1,8 +1,11 @@
-@if(user()) {
-    <h1>Witaj {{ user()!.username }}</h1>
-    <p>Email: {{ user()!.email }}</p>
-    <p>Rola {{ user()!.role }}</p>
-    <p>Ostatnie logowanie: {{ user()!.last_login_at }}</p>
-}
+<app-navbar></app-navbar>
+<div class="dashboard-container">
+    @if(user()) {
+        <h1>Witaj {{ user()!.username }}</h1>
+        <p>Email: {{ user()!.email }}</p>
+        <p>Rola {{ user()!.role }}</p>
+        <p>Ostatnie logowanie: {{ user()!.last_login_at | date: 'yyyy-MM-dd HH:mm' }}</p>
+    }
 
-<p-button (click)="logout()" label="Wyloguj"></p-button>
+    <p-button (click)="logout()" label="Wyloguj"></p-button>
+</div>

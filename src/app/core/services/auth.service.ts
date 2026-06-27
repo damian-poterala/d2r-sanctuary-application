@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { signal } from '@angular/core';
 
 import { environment } from '../../../environments/environment';
 
@@ -11,6 +12,8 @@ import { User } from '../models/user.model';
 
 export class AuthService {
     private http = inject(HttpClient);
+    currentUser = signal<User | null>(null);
+
 
     login(data: { username: string, password: string }) {
         return this.http.post(`${ environment.apiUrl }/auth/login`, data);
@@ -44,5 +47,33 @@ export class AuthService {
 
     isLoggedIn(): boolean {
         return !!this.getAccessToken();
+    }
+
+    refresh() {
+        return this.http.post<{ accessToken: string; refreshToken: string; }>(`${ environment.apiUrl }/auth/refresh`, { refreshToken: this.getRefreshToken() });
+    }
+
+    setCurrentUser(user: User): void {
+        this.currentUser.set(user);
+    }
+
+    getCurrentUser() {
+        return this.currentUser;
+    }
+
+    loadCurrentUser() {
+        if(!this.getAccessToken()) {
+            return;
+        }
+
+        this.me().subscribe({
+            next: (user) => {
+                this.currentUser.set(user);
+            },
+            error: () => {
+                this.clearTokens();
+                this.currentUser.set(null);
+            }
+        })
     }
 }

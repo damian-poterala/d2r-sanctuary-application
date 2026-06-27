@@ -1,0 +1,58 @@
+:host {
+    display: block;
+}
+
+.navbar {
+    height: 80px;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1c1c1c;
+    border-bottom: 1px solid #303030;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .25);
+}
+
+.navbar_left {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.navbar_logo {
+    display: flex;
+    align-items: center;
+
+    img {
+        height: 64px;
+        width: auto;
+        display: block;
+    }
+}
+
+.navbar_menu {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.navbar_menu a {
+    text-decoration: none;
+    color: #d0d0d0;
+    font-weight: 500;
+    transition: color .2s ease;
+}
+
+.navbar_menu a:hover {
+    color: #fff;
+}
+
+.navbar_menu a.active {
+    color: #d4af37;
+}
+
+.navbar_user {
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}

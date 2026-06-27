@@ -1,0 +1,17 @@
+<header class="navbar"> 
+    <div class="navbar_left">
+        <div class="navbar_logo">
+            <img src="./d2r_sanctuary_logo.png" alt="D2R Sanctuary">
+        </div>
+        <div class="navbar_menu">
+            <a routerLink="/dashboard"   routerLinkActive="active">Dashboard</a>
+            <a routerLink="/items"       routerLinkActive="active">Przedmioty</a>
+            <a routerLink="/marketplace" routerLinkActive="active">Marketplace</a>
+        </div>
+    </div>
+    <div class="navbar_user">
+        @if(user()) {
+            {{ user()!.username }}
+        }
+    </div>
+</header>
