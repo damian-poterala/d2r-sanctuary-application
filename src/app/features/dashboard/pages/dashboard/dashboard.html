@@ -1,11 +1,69 @@
 <app-navbar></app-navbar>
 <div class="dashboard-container">
-    @if(user()) {
-        <h1>Witaj {{ user()!.username }}</h1>
-        <p>Email: {{ user()!.email }}</p>
-        <p>Rola {{ user()!.role }}</p>
-        <p>Ostatnie logowanie: {{ user()!.last_login_at | date: 'yyyy-MM-dd HH:mm' }}</p>
-    }
-
-    <p-button (click)="logout()" label="Wyloguj"></p-button>
+    <div class="dashboard-header">
+        <div>
+            <h1>Witaj {{ user()?.username }}</h1>
+            <p>Miło Cię ponownie widzieć.</p>
+        </div>
+    </div>
+    <div class="dashboard-grid">
+        <div class="dashboard-main">
+            <div class="dashboard-card">
+                <div class="dashboard-card_header">
+                    <i class="pi pi-users"></i>
+                    <span>Moje postacie</span>
+                </div>
+                <div class="dashboard-card_body">
+                    Nie dodano jeszcze żadnej postaci.
+                </div>
+            </div>
+            <div class="dashboard-card">
+                <div class="dashboard-card_header">
+                    <i class="pi pi-megaphone"></i>
+                    <span>Moje ogłoszenia</span>
+                </div>
+                <div class="dashboard-card_body">
+                    Nie dodano jeszcze żadnego ogłoszenia.
+                </div>
+            </div>
+            <div class="dashboard-card">
+                <div class="dashboard-card_header">
+                    <i class="pi pi-heart"></i>
+                    <span>Lista życzeń</span>
+                </div>
+                <div class="dashboard-card_body">
+                    Lista życzeń jest pusta.
+                </div>
+            </div>
+            <div class="dashboard-card">
+                <div class="dashboard-card_header">
+                    <i class="pi pi-star"></i>
+                    <span>Możliwe słowa runiczne</span>
+                </div>
+                <div class="dashboard-card_body">
+                    Brak propozycji.
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-sidebar">
+            <div class="dashboard-card">
+                <div class="dashboard-card_header">
+                    <i class="pi pi-bell"></i>
+                    <span>Powiadomienia</span>
+                </div>
+                <div class="dashboard-card_body">
+                    Brak nowych powiadomień.
+                </div>
+            </div>
+            <div class="dashboard-card">
+                <div class="dashboard-card_header">
+                    <i class="pi pi-eye"></i>
+                    <span>Obserwowani gracze</span>
+                </div>
+                <div class="dashboard-card_body">
+                    Nie obserwujesz jeszcze żadnego gracza.
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

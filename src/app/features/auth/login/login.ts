@@ -45,7 +45,7 @@ export class Login {
       next: (response: any) => {
         console.log(response);
         this.authService.saveTokens(response.accessToken, response.refreshToken);
-
+        this.authService.setCurrentUser(response.user);
         this.router.navigate(['/dashboard']);
       },
       error: (error: any) => {

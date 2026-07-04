@@ -56,3 +56,19 @@
     font-weight: bold;
     cursor: pointer;
 }
+
+.navbar-user-button {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.navbar-user-button:hover {
+    color: #d4af37;
+}
