@@ -6,5 +6,6 @@ export const routes: Routes = [
     { path: ''                                    , loadComponent: () => import('./features/home/home')             .then(m => m.Home) },
     { path: 'login'    , canActivate: [guestGuard], loadComponent: () => import('./features/auth/login/login')      .then(m => m.Login) },
     { path: 'register' , canActivate: [guestGuard], loadComponent: () => import('./features/auth/register/register').then(m => m.Register) },
-    { path: 'dashboard', canActivate: [authGuard] , loadComponent: () => import('./features/dashboard/pages/dashboard/dashboard').then(m => m.Dashboard) }
+    { path: 'dashboard', canActivate: [authGuard] , loadComponent: () => import('./features/dashboard/pages/dashboard/dashboard').then(m => m.Dashboard) },
+    { path: 'items'    , canActivate: [authGuard] , loadComponent: () => import('./features/items/items').then(m => m.Items) },
 ];
